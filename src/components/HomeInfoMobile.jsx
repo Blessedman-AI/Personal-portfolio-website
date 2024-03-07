@@ -8,6 +8,7 @@ const InfoBox = ({ text, linebreak1, emoji, link, btnText }) => (
     <p className="font-medium sm:text-xl">{text}</p>
 
     {emoji}
+
     {linebreak1}
     <Link to={link} className="btnLink">
       {btnText}
@@ -29,54 +30,53 @@ const renderContent = {
 
   2: (
     <InfoBox
-      text="Need a project done or looking for a dev? 💻 I'm just a few keystrokes away"
+      text="Worked with many companies and picked up many
+      skills along the way"
+      emoji="💪"
       linebreak1={<br />}
-      //   linebreak2={<br />}
-      link="/contact"
-      btnText="Let's talk"
+      link="/about"
+      btnText="Learn more"
     />
   ),
   3: (
     <InfoBox
-      text="But if you'd rather see some of my favorite projects first, smash that button!👇"
+      text="Led multiple projects over the years. Curious to see them?"
       linebreak1={<br />}
       //   linebreak2={<br />}
       link="/projects"
       btnText="Visit my portfolio"
     />
+  ),
+  4: (
+    <InfoBox
+      text="Need a project done or looking for a dev? I'm just a few keystrokes away"
+      linebreak1={<br />}
+      //   linebreak2={<br />}
+      link="/contact"
+      btnText="Let's talk"
+    />
   )
 };
 
-export const HomeInfo = ({ currentStage }) => {
-  return renderContent[currentStage] || null;
-};
-
-export const HomeInfoMobile = () => {
+const HomeInfoMobile = () => {
   const [currentStage, setCurrentStage] = useState(1);
   const [activeContent, setActiveContent] = useState(
     renderContent[1]
-  );
+  ); // Initialize with first content
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCurrentStage(prevStage => {
-        const nextStage =
-          (prevStage % Object.keys(renderContent).length) + 1;
-        setActiveContent(renderContent[nextStage]);
-        return nextStage;
-      });
-    }, 5000);
+      const nextStage =
+        (currentStage % Object.keys(renderContent).length) + 1;
+      setCurrentStage(nextStage);
+      setActiveContent(renderContent[nextStage]); // Update active content
+    }, 3000); // Update every 3 seconds
 
+    // Cleanup function to clear the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, []);
 
-  return activeContent;
+  return activeContent; // Render the active content only
 };
 
-export const infoPopup = () => {
-  // return infoPopup();
-
-  const isMobile = window.innerWidth < 1080;
-
-  return isMobile ? <HomeInfoMobile /> : <HomeInfo />;
-};
+export default HomeInfo;

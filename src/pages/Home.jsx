@@ -6,18 +6,25 @@ import Island from '../models/Island';
 import Sky from '../models/Sky';
 // import Bird from '../models/Bird';
 import Plane from '../models/Plane';
-import HomeInfo from '../components/HomeInfo';
+import { HomeInfoMobile, HomeInfo } from '../components/HomeInfo';
 import passenger from '../assets/passenger.mp3';
 // import sakura from '../assets/sakura.mp3';
 import { soundoff, soundon } from '../assets/icons';
 
 const Home = () => {
+  const isMobile = window.innerWidth < 1080;
   const audioRef = useRef(new Audio(passenger));
   audioRef.current.volume = 0.1;
   audioRef.current.loop = true;
   const [isRotating, setIsRotating] = useState(false);
   const [currentStage, setCurrentStage] = useState(1);
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
+
+  useEffect(() => {
+    if (window.innerWidth < 1024) {
+      setIsRotating(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (isPlayingMusic) {
@@ -68,7 +75,12 @@ const Home = () => {
   return (
     <section className="w-full h-screen overflow-hidden relative">
       <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
-        {currentStage && <HomeInfo currentStage={currentStage} />}
+        {/* {currentStage && <HomeInfo currentStage={currentStage} />} */}
+        {isMobile ? (
+          <HomeInfoMobile />
+        ) : (
+          <HomeInfo currentStage={currentStage} />
+        )}
       </div>
       <Canvas
         className={`w-full h-screen bg-transparent ${
