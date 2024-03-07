@@ -9,6 +9,7 @@ const Bird = () => {
   const birdRef = useRef();
   const { scene, animations } = useGLTF(birdScene);
   const { actions } = useAnimations(animations, birdRef);
+  const isMobile = window.innerWidth < 768; // Adjust the threshold as needed
 
   useEffect(() => {
     actions['Take 001'].play();
@@ -43,7 +44,8 @@ const Bird = () => {
   return (
     <mesh
       position={[-5, 2, 1]}
-      scale={[0.003, 0.003, 0.003]}
+      // scale={[0.003, 0.003, 0.003]}
+      scale={isMobile ? [0.001, 0.001, 0.001] : [0.003, 0.003, 0.003]}
       ref={birdRef}
     >
       <primitive object={scene} />
