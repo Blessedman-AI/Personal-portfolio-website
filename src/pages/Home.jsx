@@ -4,7 +4,7 @@ import Loader from '../components/Loader';
 
 import Island from '../models/Island';
 import Sky from '../models/Sky';
-import Bird from '../models/Bird';
+// import Bird from '../models/Bird';
 import Plane from '../models/Plane';
 import HomeInfo from '../components/HomeInfo';
 import passenger from '../assets/passenger.mp3';
@@ -61,8 +61,6 @@ const Home = () => {
     return [screenScale, screenPosition];
   };
 
-
-
   const [islandScale, islandPosition, islandRotation] =
     adjustIslandForScreenSize();
 
@@ -87,7 +85,7 @@ const Home = () => {
             intensity={1}
           />
 
-          <Bird />
+          {/* <Bird /> */}
           <Sky isRotating={isRotating} />
           <Island
             position={islandPosition}
