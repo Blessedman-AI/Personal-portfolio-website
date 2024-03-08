@@ -5,13 +5,60 @@
 @tailwind utilities;
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
+
+  justify-content: center;
+  align-items: center;
 
   font-family: 'Poppins', sans-serif;
   scroll-behavior: smooth;
   color-scheme: light;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* .home-section {
+  flex: 1;
+  min-height: 100vh;
+  flex-direction: column;
+} */
+.sections {
+  height: 100%;
+  padding: 8rem 4rem 0rem 4rem;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.loaderContainer {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  left: 50%;
+  /* transform: translate(-50%, -50%); */
+}
+
+.hide {
+  opacity: 0;
+  /* pointer-events: none; */
+}
+
+.CTA-section {
+  width: 100%;
+  display: flex;
+  padding-bottom: 4rem;
+  justify-content: space-between;
+}
+
+.loader-container {
+  display: grid;
+  place-items: center;
 }
 
 .block-container {
@@ -69,8 +116,8 @@
 .link-color-yellow {
   background-image: linear-gradient(
     45deg,
-    yellow,
-    rgb(114, 218, 232)
+    rgb(207, 91, 19),
+    rgb(174, 121, 226)
   );
 }
 
@@ -109,21 +156,16 @@
 }
 
 .btn-back-yellow {
-  background: linear-gradient(45deg, yellow, rgb(114, 218, 232));
+  background: linear-gradient(
+    45deg,
+    rgb(207, 91, 19),
+    rgb(174, 121, 226)
+  );
 }
 
 .ctaText {
   font-size: 1.6rem;
   font-weight: 700;
-  /* text-align: center; */
-}
-
-.sections {
-  height: 100vh;
-  margin-left: 4rem;
-  margin-right: 4rem;
-  padding-bottom: 8rem;
-  padding-top: 6rem;
 }
 
 .iconBg {
@@ -131,14 +173,16 @@
   background-color: red;
 }
 
-.headText {
+/* .headText {
   font-size: 1.8rem;
   font-weight: 700;
-}
+  text-align: center;
+} */
 
 .subeadText {
   font-size: 1.6rem;
   font-weight: 600;
+  text-align: center;
 }
 
 .infoBox {
@@ -157,18 +201,17 @@
   max-width: 500px;
 }
 
-.CTA_btn {
+.CTA-btn {
   color: white;
   padding: 20px 40px;
   border-radius: 8px;
   display: flex;
   align-items: center;
   line-height: 6px;
-
   text-align: center;
   justify-content: center;
 
-  /* margin-top: 2rem; */
+  margin-top: 1rem;
 }
 
 .btnLink {
@@ -190,7 +233,7 @@
 .hash-span {
   margin-top: -100px;
   padding-bottom: 100px;
-  display: block;
+  /* display: block; */
 }
 
 .black-gradient {
@@ -297,7 +340,7 @@
 }
 
 /* canvas- styles */
-.canvas-loader {
+/* .canvas-loader {
   font-size: 10px;
   width: 1em;
   height: 1em;
@@ -306,11 +349,116 @@
   text-indent: -9999em;
   animation: mulShdSpin 1.1s infinite ease;
   transform: translateZ(0);
+} */
+
+/* .spinner {
+  position: relative;
+  border-radius: 50%; 
+  width: 80px;
+  height: 80px;
+  animation: spin 1s linear infinite; 
+}
+
+.spinner:before,
+.spinner:after,
+.spinner .center {
+  content: '';
+  position: absolute;
+  border: 4px solid red;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+}
+
+.spinner:before {
+  top: 0;
+  left: 0;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  animation: spin 1s linear infinite; 
+}
+
+.spinner:after {
+  top: 0;
+  left: 0;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  animation: spin 2s linear infinite; 
+}
+
+.spinner .center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: red;
+  font-weight: bold;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} */
+
+/* .spinner {
+  border: 4px solid red; 
+  border-radius: 50%; 
+  border-top: 4px solid transparent; 
+  border-bottom: 4px solid transparent; 
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} */
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (max-width: 768px) {
   .CTA_btn {
     margin-top: 1rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  .sections {
+    padding: 8rem 1rem 4rem 1rem;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .CTA-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ctaText {
+    text-align: left;
+  }
+
+  .CTA-btn {
+    justify-content: start;
   }
 }
 

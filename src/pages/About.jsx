@@ -14,33 +14,35 @@ import CTA from '../components/CTA';
 const About = () => {
   return (
     <section className="sections">
-      <h1 className="headText">
-        Hello, I'm{' '}
-        <span
-          className="text-transparent bg-clip-text 
+      <div className="flex flex-col">
+        <h1 className="headText text-3xl font-bold">
+          Hello, I'm{' '}
+          <span
+            className="text-transparent bg-clip-text 
         bg-gradient-to-r from-cyan-500 to-blue-500 
         font-semibold drop-shadow"
-        >
-          {' '}
-          Blessedman
-        </span>{' '}
-        👋
-      </h1>
+          >
+            {' '}
+            Blessedman
+          </span>{' '}
+          👋
+        </h1>
 
-      <div className="mt-5 flex flex-col gap-3 text-slate-500">
-        <p>
-          Software Engineer based in Nigeria, specializing in
-          javascript and all the frameworks and libaries associated
-          with it.
-        </p>
+        <div className="mt-4 max-w-[600px] flex flex-col justify-center text-center gap-3 text-slate-500">
+          <p className="text-center justify-center ">
+            Software Engineer based in Nigeria, specializing in
+            javascript and all the frameworks and libaries associated
+            with it.
+          </p>
+        </div>
       </div>
 
-      <div className="py-10 flex flex-col">
+      <div className="pt-12 pb-4 flex flex-col">
         <h3 className="subeadText">My Skills</h3>
 
-        <div className="mt-16 flex flex-wrap gap-12">
+        <div className="mt-4 max-w-[800px] flex flex-wrap gap-8">
           {skills.map(skill => (
-            <div className="w-20 h-20" key={skill.name}>
+            <div className="w-15 h-15" key={skill.name}>
               <div className=" rounded-xl" />
               <div
                 className="bg-[#efefef] hover:scale-150 transition duration-500
@@ -59,14 +61,16 @@ const About = () => {
         </div>
       </div>
 
-      <div className="py-16">
-        <h3 className="subeadText">Work Experience.</h3>
-        <div className="mt-5 flex flex-col gap-3 text-slate-500">
-          <p>
-            I've worked with all sorts of companies, leveling up my
-            skills and teaming up with smart people. Here's the
-            rundown:
-          </p>
+      <div className="pt-12  pb-4">
+        <div className=" flex flex-col">
+          <h3 className="subeadText">Work Experience.</h3>
+          <div className="mt-4 max-w-[600px]   text-center  text-slate-500">
+            <p>
+              I've worked with all sorts of companies, leveling up my
+              skills and teaming up with smart people. Here's the
+              rundown:
+            </p>
+          </div>
         </div>
 
         <div className="mt-12 flex">

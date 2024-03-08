@@ -1,6 +1,7 @@
 import { Suspense, useState, useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
-import Loader from '../components/Loader';
+// import { Loader1, Loader2 } from '../components/Loader';
+import { Html, useProgress } from '@react-three/drei';
 
 import Island from '../models/Island';
 import Sky from '../models/Sky';
@@ -10,8 +11,9 @@ import { HomeInfoMobile, HomeInfo } from '../components/HomeInfo';
 import passenger from '../assets/passenger.mp3';
 // import sakura from '../assets/sakura.mp3';
 import { soundoff, soundon } from '../assets/icons';
+import { Triangle } from 'react-loader-spinner';
 
-const Home = () => {
+const Home = ({ modelLoad }) => {
   const isMobile = window.innerWidth < 1080;
   const audioRef = useRef(new Audio(passenger));
   audioRef.current.volume = 0.1;
@@ -19,22 +21,16 @@ const Home = () => {
   const [isRotating, setIsRotating] = useState(false);
   const [currentStage, setCurrentStage] = useState(1);
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
+  // const [modelLoad, setModelLoad] = useState(0);
 
-  useEffect(() => {
-    if (window.innerWidth < 1024) {
-      setIsRotating(true);
-    }
-  }, []);
+  // const { progress } = useProgress(); // Access progress from useProgress
+  const shouldShowTriangle = modelLoad < 100;
 
-  useEffect(() => {
-    if (isPlayingMusic) {
-      audioRef.current.play();
-    }
+  // useEffect(() => {
+  //   setModelLoad(progress); // Update modelLoad with progress
+  // }, [progress]);
 
-    return () => {
-      audioRef.current.pause();
-    };
-  }, [isPlayingMusic]);
+  // console.log(modelLoad);
 
   const adjustIslandForScreenSize = () => {
     let screenScale = null;
@@ -72,60 +68,133 @@ const Home = () => {
     adjustIslandForScreenSize();
 
   const [planeScale, planePosition] = adjustPlaneForScreenSize();
+
+  // if (modelLoad < 100) {
+  //   <div className="flex items-center justify-center">
+  //     <Triangle />
+  //   </div>;
+  // }
+
   return (
-    <section className="w-full h-screen overflow-hidden relative">
-      <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
-        {/* {currentStage && <HomeInfo currentStage={currentStage} />} */}
-        {isMobile ? (
-          <HomeInfoMobile />
-        ) : (
-          <HomeInfo currentStage={currentStage} />
+    <section className="w-full h-screen relative">
+      <div className="flex items-center justify-center">
+        {shouldShowTriangle && (
+          <div className="loaderContainer flex items-center justify-center ">
+            <Triangle />
+          </div>
         )}
       </div>
-      <Canvas
-        className={`w-full h-screen bg-transparent ${
-          isRotating ? 'cursor-grabbing' : 'cursor-grab'
+      <div
+        className={`w-full h-screen overflow-hidden relative ${
+          modelLoad === 100 ? '' : 'hide'
         }`}
-        camera={{ near: 0.1, far: 1000 }}
       >
-        <Suspense fallback={<Loader />}>
-          <directionalLight position={[1, 1, 1]} intensity={2} />
-          <ambientLight intensity={0.5} />
-          <hemisphereLight
-            skyColor="#b1e1ff"
-            groundColor="#000000"
-            intensity={1}
-          />
+        <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
+          {isMobile ? (
+            <HomeInfoMobile />
+          ) : (
+            <HomeInfo currentStage={currentStage} />
+          )}
+        </div>
+        <Canvas
+          className={`w-full h-screen bg-transparent ${
+            isRotating ? 'cursor-grabbing' : 'cursor-grab'
+          }`}
+          camera={{ near: 0.1, far: 1000 }}
+        >
+          <Suspense>
+            <directionalLight position={[1, 1, 1]} intensity={2} />
+            <ambientLight intensity={0.5} />
+            <hemisphereLight
+              skyColor="#b1e1ff"
+              groundColor="#000000"
+              intensity={1}
+            />
 
-          {/* <Bird /> */}
-          <Sky isRotating={isRotating} />
-          <Island
-            position={islandPosition}
-            scale={islandScale}
-            rotation={islandRotation}
-            isRotating={isRotating}
-            setIsRotating={setIsRotating}
-            setCurrentStage={setCurrentStage}
-          />
-          <Plane
-            isRotating={isRotating}
-            scale={planeScale}
-            position={planePosition}
-            rotation={[0, 20, 0]}
-          />
-        </Suspense>
-      </Canvas>
+            {/* <Bird /> */}
+            <Sky isRotating={isRotating} />
+            <Island
+              position={islandPosition}
+              scale={islandScale}
+              rotation={islandRotation}
+              isRotating={isRotating}
+              setIsRotating={setIsRotating}
+              setCurrentStage={setCurrentStage}
+            />
+            <Plane
+              isRotating={isRotating}
+              scale={planeScale}
+              position={planePosition}
+              rotation={[0, 20, 0]}
+            />
+          </Suspense>
+        </Canvas>
 
-      <div className="absolute bottom-2 left-2">
-        <img
-          src={!isPlayingMusic ? soundoff : soundon}
-          alt="jukebox"
-          onClick={() => setIsPlayingMusic(!isPlayingMusic)}
-          className="w-10 h-10 cursor-pointer object-contain"
-        />
+        <div className="absolute bottom-2 left-2">
+          <img
+            src={!isPlayingMusic ? soundoff : soundon}
+            alt="jukebox"
+            onClick={() => setIsPlayingMusic(!isPlayingMusic)}
+            className="w-10 h-10 cursor-pointer object-contain"
+          />
+        </div>
       </div>
     </section>
   );
+
+  // return (
+  //   <section className="w-full h-screen overflow-hidden relative">
+  //     <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
+  //       {isMobile ? (
+  //         <HomeInfoMobile />
+  //       ) : (
+  //         <HomeInfo currentStage={currentStage} />
+  //       )}
+  //     </div>
+  //     <Canvas
+  //       className={`w-full h-screen bg-transparent ${
+  //         isRotating ? 'cursor-grabbing' : 'cursor-grab'
+  //       }`}
+  //       camera={{ near: 0.1, far: 1000 }}
+  //     >
+  //       <Suspense>
+  //         <directionalLight position={[1, 1, 1]} intensity={2} />
+  //         <ambientLight intensity={0.5} />
+  //         <hemisphereLight
+  //           skyColor="#b1e1ff"
+  //           groundColor="#000000"
+  //           intensity={1}
+  //         />
+
+  //         {/* <Bird /> */}
+  //         <Sky isRotating={isRotating} />
+  //         <Island
+  //           position={islandPosition}
+  //           scale={islandScale}
+  //           rotation={islandRotation}
+  //           isRotating={isRotating}
+  //           setIsRotating={setIsRotating}
+  //           setCurrentStage={setCurrentStage}
+  //         />
+  //         <Plane
+  //           isRotating={isRotating}
+  //           scale={planeScale}
+  //           position={planePosition}
+  //           rotation={[0, 20, 0]}
+  //         />
+  //       </Suspense>
+  //     </Canvas>
+
+  //     <div className="absolute bottom-2 left-2">
+  //       <img
+  //         src={!isPlayingMusic ? soundoff : soundon}
+  //         alt="jukebox"
+  //         onClick={() => setIsPlayingMusic(!isPlayingMusic)}
+  //         className="w-10 h-10 cursor-pointer object-contain"
+  //       />
+  //     </div>
+  //   </section>
+  // );
 };
 
 export default Home;
