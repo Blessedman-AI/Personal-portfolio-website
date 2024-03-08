@@ -3,10 +3,11 @@ import { Canvas } from '@react-three/fiber';
 import { Suspense, useRef, useState } from 'react';
 
 import Fox from '../models/Fox';
-// import { Loader1, Loader2 } from '../components/Loader';
+import { LoaderContact } from '../components/Loader';
 import useAlert from '../hooks/useAlert';
 import Alert from '../components/Alert';
-// import { Alert, Loader } from '../components';
+
+const Loader = LoaderContact;
 
 const Contact = () => {
   const formRef = useRef(null);
@@ -190,7 +191,7 @@ const Contact = () => {
               intensity={2}
             />
 
-            <Suspense>
+            <Suspense fallback={<Loader />}>
               <Fox
                 currentAnimation={currentAnimation}
                 position={[0.5, 0.35, 0]}

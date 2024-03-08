@@ -1,8 +1,17 @@
 import { useState, useEffect } from 'react';
-import { useProgress } from '@react-three/drei';
+import { Html, useProgress } from '@react-three/drei';
 import App from '../App';
+import { Triangle } from 'react-loader-spinner';
 
-
+export const LoaderContact = () => {
+  return (
+    <Html>
+      <div>
+        <Triangle />
+      </div>
+    </Html>
+  );
+};
 
 // import { Html, useProgress } from '@react-three/drei';
 // import { useState, useRef } from 'react';
