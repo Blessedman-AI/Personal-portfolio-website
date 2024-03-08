@@ -7,7 +7,7 @@ import { LoaderContact } from '../components/Loader';
 import useAlert from '../hooks/useAlert';
 import Alert from '../components/Alert';
 
-const Loader = LoaderContact;
+// const Loader = LoaderContact;
 
 const Contact = () => {
   const formRef = useRef(null);
@@ -191,7 +191,7 @@ const Contact = () => {
               intensity={2}
             />
 
-            <Suspense fallback={<Loader />}>
+            <Suspense fallback={<LoaderContact />}>
               <Fox
                 currentAnimation={currentAnimation}
                 position={[0.5, 0.35, 0]}
