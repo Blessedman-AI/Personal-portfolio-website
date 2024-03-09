@@ -18,19 +18,24 @@ const Home = ({ modelLoad }) => {
   const audioRef = useRef(new Audio(passenger));
   audioRef.current.volume = 0.1;
   audioRef.current.loop = true;
-  const [isRotating, setIsRotating] = useState(false);
+  let [isRotating, setIsRotating] = useState(false);
   const [currentStage, setCurrentStage] = useState(1);
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
-  // const [modelLoad, setModelLoad] = useState(0);
+
+  window.innerWidth < 768 ? (isRotating = true) : false;
+
+  useEffect(() => {
+    document.body.addEventListener(
+      'touchmove',
+      function (event) {
+        event.preventDefault();
+      },
+      { passive: false }
+    ); // Use passive: false for touch devices
+  }, []);
 
   // const { progress } = useProgress(); // Access progress from useProgress
   const shouldShowTriangle = modelLoad < 100;
-
-  // useEffect(() => {
-  //   setModelLoad(progress); // Update modelLoad with progress
-  // }, [progress]);
-
-  // console.log(modelLoad);
 
   const adjustIslandForScreenSize = () => {
     let screenScale = null;
@@ -68,12 +73,6 @@ const Home = ({ modelLoad }) => {
     adjustIslandForScreenSize();
 
   const [planeScale, planePosition] = adjustPlaneForScreenSize();
-
-  // if (modelLoad < 100) {
-  //   <div className="flex items-center justify-center">
-  //     <Triangle />
-  //   </div>;
-  // }
 
   return (
     <section className="w-full h-screen relative">
