@@ -1,4 +1,5 @@
 import { Suspense, useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Canvas } from '@react-three/fiber';
 // import { Loader1, Loader2 } from '../components/Loader';
 import { Html, useProgress } from '@react-three/drei';
@@ -21,17 +22,21 @@ const Home = ({ modelLoad }) => {
   let [isRotating, setIsRotating] = useState(false);
   const [currentStage, setCurrentStage] = useState(1);
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   window.innerWidth < 768 ? (isRotating = true) : false;
 
   useEffect(() => {
-    document.body.addEventListener(
-      'touchmove',
-      function (event) {
-        event.preventDefault();
-      },
-      { passive: false }
-    ); // Use passive: false for touch devices
+    if (isHomePage) {
+      document.body.addEventListener(
+        'touchmove',
+        function (event) {
+          event.preventDefault();
+        },
+        { passive: false }
+      ); // Use passive: false for touch devices
+    }
   }, []);
 
   // const { progress } = useProgress(); // Access progress from useProgress
