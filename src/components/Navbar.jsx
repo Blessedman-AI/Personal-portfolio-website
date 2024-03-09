@@ -4,6 +4,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 const Navbar = ({ modelLoad }) => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
+
   return (
     <header
       className={`flex w-full justify-center ${
