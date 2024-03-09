@@ -52,11 +52,14 @@ const Island = ({
         : event.clientX;
 
       const delta = (clientX - lastX.current) / viewport.width;
-      islandRef.current.rotation.y += delta * 0.01 * Math.PI;
+      const multiplier = event.touches ? 0.07 : 0.04;
+      // islandRef.current.rotation.y += delta * 0.01 * Math.PI;
+      islandRef.current.rotation.y += delta * multiplier * Math.PI;
 
       lastX.current = clientX;
 
-      rotationSpeed.current = delta * 0.01 * Math.PI;
+      // rotationSpeed.current = delta * 0.01 * Math.PI;
+      rotationSpeed.current = delta * multiplier * Math.PI;
     }
   };
 
