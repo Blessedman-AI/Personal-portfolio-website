@@ -19,6 +19,7 @@ const Contact = () => {
   const { alert, showAlert, hideAlert } = useAlert();
   const [isLoading, setIsLoading] = useState(false);
   const [currentAnimation, setCurrentAnimation] = useState('idle');
+  const isContactPage = location.pathname === '/contact';
 
   // const handleChange = ({ target: { name, value } }) => {
   //   setForm({ ...form, [name]: value });
@@ -32,6 +33,19 @@ const Contact = () => {
 
   const handleFocus = () => setCurrentAnimation('walk');
   const handleBlur = () => setCurrentAnimation('idle');
+
+  // useEffect(() => {
+  //   console.log(isHomePage);
+  //   if (isContactPage) {
+  //     document.body.addEventListener(
+  //       'touchmove',
+  //       function (event) {
+  //         event.preventDefault();
+  //       },
+  //       { passive: true }
+  //     ); // Use passive: false for touch devices
+  //   }
+  // }, []);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -86,7 +100,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="overflow-x-hidden">
+    <section className=" pl-6 pr-6 overflow-x-hidden">
       <div className="flex mt-[8rem] justify-center">
         {' '}
         <h1

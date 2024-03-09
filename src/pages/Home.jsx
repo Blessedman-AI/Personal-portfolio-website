@@ -27,17 +27,17 @@ const Home = ({ modelLoad }) => {
 
   window.innerWidth < 768 ? (isRotating = true) : false;
 
-  useEffect(() => {
-    if (isHomePage) {
-      document.body.addEventListener(
-        'touchmove',
-        function (event) {
-          event.preventDefault();
-        },
-        { passive: false }
-      ); // Use passive: false for touch devices
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (isHomePage) {
+  //     document.body.addEventListener(
+  //       'touchmove',
+  //       function (event) {
+  //         event.preventDefault();
+  //       },
+  //       { passive: true }
+  //     ); // Use passive: false for touch devices
+  //   }
+  // }, []);
 
   // const { progress } = useProgress(); // Access progress from useProgress
   const shouldShowTriangle = modelLoad < 100;
