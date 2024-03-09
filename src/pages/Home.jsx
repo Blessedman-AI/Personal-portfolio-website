@@ -88,8 +88,11 @@ const Home = ({ modelLoad }) => {
 
   if (isHomePage) {
     return (
-      <div onTouchMove={event => event.preventDefault()}>
-        <section className="w-full h-screen relative">
+      <div
+        onTouchMove={event => event.preventDefault()}
+        className="w-full h-screen relative"
+      >
+        <section>
           <div className="flex items-center justify-center">
             {shouldShowTriangle && (
               <div className="loaderContainer flex items-center justify-center ">
