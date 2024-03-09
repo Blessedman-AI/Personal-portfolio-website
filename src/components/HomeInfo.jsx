@@ -29,7 +29,6 @@ const renderContent = {
           </span>
         </>
       }
-      //   linebreak2={<br />}
       link="/contact"
       btnText="Let's talk"
     />
