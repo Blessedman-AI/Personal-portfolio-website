@@ -52,7 +52,8 @@ const Island = ({
         : event.clientX;
 
       const delta = (clientX - lastX.current) / viewport.width;
-      const multiplier = event.touches ? 0.1 : 0.04;
+      console.log(delta);
+      const multiplier = event.touches ? 0.5 : 0.04;
       // islandRef.current.rotation.y += delta * 0.01 * Math.PI;
       islandRef.current.rotation.y += delta * multiplier * Math.PI;
 
