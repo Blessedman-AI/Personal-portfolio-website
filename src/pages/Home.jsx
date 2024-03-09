@@ -34,10 +34,17 @@ const Home = ({ modelLoad }) => {
   //       function (event) {
   //         event.preventDefault();
   //       },
-  //       { passive: true }
+  //       { passive: false }
   //     ); // Use passive: false for touch devices
+  //   } else {
+  //     document.body.removeEventListener('touchmove', {
+  //       passive: false
+  //     });
   //   }
-  // }, []);
+  // }, [isHomePage]);
+
+  // console.log(isHomePage);
+  // console.log(location.pathname);
 
   // const { progress } = useProgress(); // Access progress from useProgress
   const shouldShowTriangle = modelLoad < 100;
@@ -79,73 +86,80 @@ const Home = ({ modelLoad }) => {
 
   const [planeScale, planePosition] = adjustPlaneForScreenSize();
 
-  return (
-    <section className="w-full h-screen relative">
-      <div className="flex items-center justify-center">
-        {shouldShowTriangle && (
-          <div className="loaderContainer flex items-center justify-center ">
-            <Triangle />
+  if (isHomePage) {
+    return (
+      <div onTouchMove={event => event.preventDefault()}>
+        <section className="w-full h-screen relative">
+          <div className="flex items-center justify-center">
+            {shouldShowTriangle && (
+              <div className="loaderContainer flex items-center justify-center ">
+                <Triangle />
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      <div
-        className={`w-full h-screen overflow-hidden relative ${
-          modelLoad === 100 ? '' : 'hide'
-        }`}
-      >
-        <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
-          {/* {isMobile ? (
+          <div
+            className={`w-full h-screen overflow-hidden relative ${
+              modelLoad === 100 ? '' : 'hide'
+            }`}
+          >
+            <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
+              {/* {isMobile ? (
             <HomeInfoMobile />
           ) : (
             <HomeInfo currentStage={currentStage} />
           )} */}
-          <HomeInfo currentStage={currentStage} />
-        </div>
-        <Canvas
-          className={`w-full h-screen bg-transparent ${
-            isRotating ? 'cursor-grabbing' : 'cursor-grab'
-          }`}
-          camera={{ near: 0.1, far: 1000 }}
-        >
-          <Suspense>
-            <directionalLight position={[1, 1, 1]} intensity={2} />
-            <ambientLight intensity={0.5} />
-            <hemisphereLight
-              skyColor="#b1e1ff"
-              groundColor="#000000"
-              intensity={1}
-            />
+              <HomeInfo currentStage={currentStage} />
+            </div>
+            <Canvas
+              className={`w-full h-screen bg-transparent ${
+                isRotating ? 'cursor-grabbing' : 'cursor-grab'
+              }`}
+              camera={{ near: 0.1, far: 1000 }}
+            >
+              <Suspense>
+                <directionalLight
+                  position={[1, 1, 1]}
+                  intensity={2}
+                />
+                <ambientLight intensity={0.5} />
+                <hemisphereLight
+                  skyColor="#b1e1ff"
+                  groundColor="#000000"
+                  intensity={1}
+                />
 
-            {/* <Bird /> */}
-            <Sky isRotating={isRotating} />
-            <Island
-              position={islandPosition}
-              scale={islandScale}
-              rotation={islandRotation}
-              isRotating={isRotating}
-              setIsRotating={setIsRotating}
-              setCurrentStage={setCurrentStage}
-            />
-            <Plane
-              isRotating={isRotating}
-              scale={planeScale}
-              position={planePosition}
-              rotation={[0, 20, 0]}
-            />
-          </Suspense>
-        </Canvas>
+                {/* <Bird /> */}
+                <Sky isRotating={isRotating} />
+                <Island
+                  position={islandPosition}
+                  scale={islandScale}
+                  rotation={islandRotation}
+                  isRotating={isRotating}
+                  setIsRotating={setIsRotating}
+                  setCurrentStage={setCurrentStage}
+                />
+                <Plane
+                  isRotating={isRotating}
+                  scale={planeScale}
+                  position={planePosition}
+                  rotation={[0, 20, 0]}
+                />
+              </Suspense>
+            </Canvas>
 
-        <div className="absolute bottom-2 left-2">
-          <img
-            src={!isPlayingMusic ? soundoff : soundon}
-            alt="jukebox"
-            onClick={() => setIsPlayingMusic(!isPlayingMusic)}
-            className="w-10 h-10 cursor-pointer object-contain"
-          />
-        </div>
+            <div className="absolute bottom-2 left-2">
+              <img
+                src={!isPlayingMusic ? soundoff : soundon}
+                alt="jukebox"
+                onClick={() => setIsPlayingMusic(!isPlayingMusic)}
+                className="w-10 h-10 cursor-pointer object-contain"
+              />
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
-  );
+    );
+  }
 
   // return (
   //   <section className="w-full h-screen overflow-hidden relative">
