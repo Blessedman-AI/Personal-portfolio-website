@@ -18,16 +18,47 @@ const InfoBox = ({ text, linebreak1, emoji, link, btnText }) => (
 
 const renderContent = {
   1: (
-    <h1
-      className="sm:text-xl sm: leading-snug text-center py-4 px-8
-     text-white mx-5 bg-blue-500 rounded-lg"
-    >
-      Hi, I am <span className="font-semibold">Blessedman</span> 👋
-      <br />A Software Engineer from Nigeria
-    </h1>
+    <InfoBox
+      text={
+        <>
+          Hi, I'm <span className="font-semibold">Blessedman</span> 👋
+          <br />A Software Engineer from Nigeria. <br />{' '}
+          <span className="text-[0.9rem] mt-1">
+            Rotate the island for more options or click the button to
+            see my portfolio.
+          </span>
+        </>
+      }
+      //   linebreak2={<br />}
+      link="/contact"
+      btnText="Let's talk"
+    />
+
+    // <h1
+    //   className="sm:text-xl sm: leading-snug text-center py-4 px-8
+    //  text-white mx-5 bg-blue-500 rounded-lg"
+    // >
+    //   Hi, I'm <span className="font-semibold">Blessedman</span> 👋
+    //   <br />A Software Engineer from Nigeria. <br /> Rotatate the
+    //   island for more options or click the button to see my portfolio
+    // </h1>
   ),
 
   2: (
+    <InfoBox
+      text={
+        <>
+          Worked with many companies <br /> and picked up many skills
+          along the way 💪
+        </>
+      }
+      linebreak1={<br />}
+      //   linebreak2={<br />}
+      link="/about"
+      btnText="About me"
+    />
+  ),
+  3: (
     <InfoBox
       text="Need a project done or looking for a dev? 💻 I'm just a few keystrokes away"
       linebreak1={<br />}
@@ -36,7 +67,7 @@ const renderContent = {
       btnText="Let's talk"
     />
   ),
-  3: (
+  4: (
     <InfoBox
       text="But if you'd rather see some of my favorite projects first, smash that button!👇"
       linebreak1={<br />}

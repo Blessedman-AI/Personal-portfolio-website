@@ -94,11 +94,12 @@ const Home = ({ modelLoad }) => {
         }`}
       >
         <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
-          {isMobile ? (
+          {/* {isMobile ? (
             <HomeInfoMobile />
           ) : (
             <HomeInfo currentStage={currentStage} />
-          )}
+          )} */}
+          <HomeInfo currentStage={currentStage} />
         </div>
         <Canvas
           className={`w-full h-screen bg-transparent ${
